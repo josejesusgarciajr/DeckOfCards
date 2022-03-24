@@ -14,7 +14,15 @@ namespace Cards.Controllers
 {
     public class HomeController : Controller
     {
+        /*
+         * HOW TO READ JSON DATA FROM AN API
+         * https://docs.microsoft.com/en-us/dotnet/api/system.net.webrequest?view=net-6.0
+         * 
+         * HOW TO DESERIALIZE JSONDATA INTO AN OBJECT
+         * https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to?pivots=dotnet-5-0#how-to-read-json-as-net-objects-deserialize
+         */
         private readonly ILogger<HomeController> _logger;
+        private static DeckOfCards? deckOfCards { get; set; }
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -26,13 +34,14 @@ namespace Cards.Controllers
             return View();
         }
 
-        /*
-         * https://docs.microsoft.com/en-us/dotnet/api/system.net.webrequest?view=net-6.0
-         */
         public IActionResult ShuffleDeck()
         {
+            /*
+             * Read JsonData
+             */
+            string url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
             WebRequest request =
-                WebRequest.Create("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1");
+                WebRequest.Create(url);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
@@ -52,8 +61,10 @@ namespace Cards.Controllers
             dataStream.Close();
             response.Close();
 
-            // json data
-            DeckOfCards? deckOfCards =
+            /*
+             * Deserialize JsonData to Object
+             */
+            deckOfCards =
                 JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
 
             Console.WriteLine("");
@@ -63,6 +74,13 @@ namespace Cards.Controllers
             Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
 
             return View();
+        }
+
+        public IActionResult DrawCards(int numberOfCards)
+        {
+            Console.WriteLine($"Number of Cards to Draw: {numberOfCards}");
+            Card[] cards = deckOfCards?.DrawCard(numberOfCards);
+            return View(cards);
         }
 
         public IActionResult Privacy()

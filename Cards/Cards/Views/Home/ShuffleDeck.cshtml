@@ -1,10 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿
 @{
     ViewData["Title"] = "Shuffled Deck";
 }
 
 <div class="text-center">
     <h2 class="display-4">Shuffled Deck!</h2>
+</div>
+
+<div class="container">
+    <p class="lead">How many Cards do you want do draw?</p>
+    <form asp-controller="Home" asp-action="DrawCards">
+        <input type="number" placeholder="3" step="1" min="1" max="52"
+               name="numberOfCards" class="form-control" />
+    </form>
 </div>

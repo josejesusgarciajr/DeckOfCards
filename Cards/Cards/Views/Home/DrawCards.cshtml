@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Drawn Cards";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Drawn Cards</h2>
+</div>
+
+<div>
+    @foreach(Card card in @Model)
+    {
+        <img src="@card.image"/>
+    }
+</div>
+
+

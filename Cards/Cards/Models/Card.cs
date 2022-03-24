@@ -3,19 +3,19 @@ namespace Cards.Models
 {
     public class Card
     {
-        public string Image { get; set; }
-        public string Value { get; set; }
-        public string Suit { get; set; }
-        public string Code { get; set; }
+        public string image { get; set; }
+        public string value { get; set; }
+        public string suit { get; set; }
+        public string code { get; set; }
 
         public Card(){ }
 
-        public Card(string image, string value, string suit, string code)
+        public Card(string img, string val, string su, string c)
         {
-            Image = image;
-            Value = value;
-            Suit = suit;
-            Code = code;
+            image = img;
+            value = val;
+            suit = su;
+            code = c;
         }
 
 
