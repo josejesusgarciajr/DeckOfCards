@@ -8,9 +8,13 @@
 </div>
 
 <div>
-    @foreach(Card card in @Model)
+    <p class="lead">Return card to Deck</p>
+    @foreach (Card card in @Model)
     {
-        <img src="@card.image"/>
+        <a asp-controller="Home" asp-action="ReturnCardToDeck"
+           asp-route-code="@card.code">
+            <img src="@card.image" />
+        </a>
     }
 </div>
 

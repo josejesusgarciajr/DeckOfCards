@@ -76,11 +76,30 @@ namespace Cards.Controllers
             return View();
         }
 
-        public IActionResult DrawCards(int numberOfCards)
+        public IActionResult DrawCards(int numberOfCards = -1)
         {
             Console.WriteLine($"Number of Cards to Draw: {numberOfCards}");
-            Card[] cards = deckOfCards?.DrawCard(numberOfCards);
+            Card[] cards = new Card[1];
+
+            if(numberOfCards == -1)
+            {
+                Console.WriteLine("RETURN CARD NOT FIRED");
+               
+                // get vanessas cards
+                cards = deckOfCards.GetVanessasCards();
+            } else
+            {
+                Console.WriteLine($"RETURN CARD FIRED");
+                cards = deckOfCards?.DrawCard(numberOfCards);
+            }
+
             return View(cards);
+        }
+
+        public IActionResult ReturnCardToDeck(string code)
+        {
+            deckOfCards?.ReturnCardToDeck(code);
+            return RedirectToAction("DrawCards", "Home", -1);
         }
 
         public IActionResult Privacy()
