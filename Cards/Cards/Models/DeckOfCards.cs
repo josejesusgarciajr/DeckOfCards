@@ -14,8 +14,6 @@ namespace Cards.Models
         public int remaining { get; set; }
         public Card[]? cards { get; set; }
 
-        //public Card[,] piles { get; set; }
-
         // vanessas hand
         public Card[]? Vanessa { get; set; }
 
@@ -71,10 +69,78 @@ namespace Cards.Models
 
         public Card[] GetVanessasCards()
         {
-            Console.WriteLine("HELLO");
             // list pile to show
             string url = $"http://deckofcardsapi.com/api/deck/{deck_id}/pile/Vanessa/list/";
-            Console.WriteLine($"IDK: {url}");
+            WebRequest request = WebRequest.Create(url);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Console.WriteLine(response.StatusDescription);
+
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            // Cleanup the streams and the response.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            List<Card> d = new List<Card>();
+            using (JsonDocument document = JsonDocument.Parse(responseFromServer))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement piles = root.GetProperty("piles");
+                JsonElement vanessa = piles.GetProperty("Vanessa");
+                JsonElement cards = vanessa.GetProperty("cards");
+                Console.WriteLine("");
+                Console.WriteLine($"Vanessa????: {cards}");
+
+                foreach (JsonElement card in cards.EnumerateArray())
+                {
+                    string image = card.GetProperty("image").ToString();
+                    string value = card.GetProperty("value").ToString();
+                    string suit = card.GetProperty("suit").ToString();
+                    string code = card.GetProperty("code").ToString();
+                    d.Add(new Card(image, value, suit, code));
+                }
+            }
+
+            return d.ToArray();
+        }
+
+        public void AddToPile(DeckOfCards? deckOfCards, string pile = "Vanessa")
+        {
+            // add to vanessa pile ----------------------------------------------------------------
+            string cardsForVanessa = ForVanessa(deckOfCards.cards);
+            string vanessaURL =
+                    $"http://deckofcardsapi.com/api/deck/{deckOfCards.deck_id}/pile/{pile}/add/?cards={cardsForVanessa}";
+            Console.WriteLine($"URL Vanessa: {vanessaURL}");
+            WebRequest request = WebRequest.Create(vanessaURL);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Console.WriteLine(response.StatusDescription);
+
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine(responseFromServer);
+            // Cleanup the streams and the response.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+        }
+
+        public Card[] ListPile(DeckOfCards deckOfCards, string pile = "Vanessa")
+        {
+            string url = $"http://deckofcardsapi.com/api/deck/{deckOfCards.deck_id}/pile/{pile}/list/";
             WebRequest request = WebRequest.Create(url);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -113,6 +179,7 @@ namespace Cards.Models
                 }
             }
             Console.WriteLine($"LIST: {d.Count}");
+
             return d.ToArray();
         }
 
@@ -150,80 +217,12 @@ namespace Cards.Models
             Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
             Console.WriteLine($"Cards: {deckOfCards?.cards}");
 
-            // add to vanessa pile ----------------------------------------------------------------
-            //deckOfCards?.Vanessa =
-            string cardsForVanessa = ForVanessa(deckOfCards?.cards);
-            string vanessaURL =
-                    $"http://deckofcardsapi.com/api/deck/{deckOfCards?.deck_id}/pile/Vanessa/add/?cards={cardsForVanessa}";
-            Console.WriteLine($"URL: {vanessaURL}");
-            request = WebRequest.Create(vanessaURL);
-
-            response = (HttpWebResponse)request.GetResponse();
-            Console.WriteLine(response.StatusDescription);
-
-            // Get the stream containing content returned by the server.
-            dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            reader = new StreamReader(dataStream);
-            // Read the content.
-            responseFromServer = reader.ReadToEnd();
-            // Display the content.
-            Console.WriteLine(responseFromServer);
-            // Cleanup the streams and the response.
-            reader.Close();
-            dataStream.Close();
-            response.Close();
-
-            // Deserialize JsonData into Object
-            deckOfCards =
-                JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
-
+            AddToPile(deckOfCards);
+ 
             // list pile to show
-            url = $"http://deckofcardsapi.com/api/deck/{deckOfCards?.deck_id}/pile/Vanessa/list/";
-            Console.WriteLine($"IDK: {url}");
-            request = WebRequest.Create(url);
+            deckOfCards.Vanessa = ListPile(deckOfCards);
 
-            response = (HttpWebResponse)request.GetResponse();
-            Console.WriteLine(response.StatusDescription);
-
-            // Get the stream containing content returned by the server.
-            dataStream = response.GetResponseStream();
-            // Open the stream using a StreamReader for easy access.
-            reader = new StreamReader(dataStream);
-            // Read the content.
-            responseFromServer = reader.ReadToEnd();
-            // Display the content.
-            Console.WriteLine(responseFromServer);
-            // Cleanup the streams and the response.
-            reader.Close();
-            dataStream.Close();
-            response.Close();
-
-            // Deserialize JsonData into Object
-            deckOfCards =
-                JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
-
-            List<Card> d = new List<Card>();
-            using (JsonDocument document = JsonDocument.Parse(responseFromServer))
-            {
-                JsonElement root = document.RootElement;
-                JsonElement piles = root.GetProperty("piles");
-                JsonElement vanessa = piles.GetProperty("Vanessa");
-                JsonElement cards = vanessa.GetProperty("cards");
-                Console.WriteLine("");
-                Console.WriteLine($"Vanessa????: {cards}");
-   
-                foreach (JsonElement card in cards.EnumerateArray())
-                {
-                    string image = card.GetProperty("image").ToString();
-                    string value = card.GetProperty("value").ToString();
-                    string suit = card.GetProperty("suit").ToString();
-                    string code = card.GetProperty("code").ToString();
-                    d.Add(new Card(image, value, suit, code));
-                }
-            }
-            Console.WriteLine($"LIST: {d.Count}");
-            return d.ToArray();
+            return ListPile(deckOfCards);
 
         }
 

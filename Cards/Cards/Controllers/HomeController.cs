@@ -37,8 +37,8 @@ namespace Cards.Controllers
         public IActionResult ShuffleDeck()
         {
             /*
-             * Read JsonData
-             */
+            * Read JsonData
+            */
             string url = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
             WebRequest request =
                 WebRequest.Create(url);
@@ -60,19 +60,20 @@ namespace Cards.Controllers
             reader.Close();
             dataStream.Close();
             response.Close();
-
+            Console.WriteLine("CLOSED EVERYTHING");
             /*
              * Deserialize JsonData to Object
              */
+            Console.WriteLine("BEFORE DESERIALZIE");
             deckOfCards =
                 JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
+            Console.WriteLine("DESERIALIZE");
 
             Console.WriteLine("");
             Console.WriteLine($"Success: {deckOfCards?.success}");
-            Console.WriteLine($"DeckID: {deckOfCards?.deck_id}");
+            Console.WriteLine($"DeckID: {deckOfCards.deck_id}");
             Console.WriteLine($"Shuffled: {deckOfCards?.shuffled}");
             Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
-
             return View();
         }
 
