@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="text-center">
+    @if(ViewData["CharacterName"] == null)
+    {
+        <h2 class="display-4">All Characters in the Rick & Morty Universe!</h2>
+    } else
+    {
+        <h2 class="display-4">Characters named @ViewData["CharacterName"]</h2>
+    }
+</div>
+
+<div class="container">
+
+    <form asp-controller="Rick" asp-action="Search">
+        <input type="text" placeholder="Search for characters in the Rick & Morty Universe!"
+               name="character" class="form-control" /> <br />
+    </form>
+
+    @if(Model == null)
+    {
+        <p class="lead">No Characters name <code> @ViewData["CharacterName"] </code> in the Rick & Morty Universe :(</p>
+    } else
+    {
+        @foreach (Character character in Model)
+        {
+            <a asp-controller="Rick" asp-action="ShowCharacter"
+               asp-route-characterID="@character.ID">
+                <img src="@character.Image"
+                     width="175" height="175" />
+            </a>
+        }
+    }
+</div>

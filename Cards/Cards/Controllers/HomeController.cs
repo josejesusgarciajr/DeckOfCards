@@ -20,6 +20,9 @@ namespace Cards.Controllers
          * 
          * HOW TO DESERIALIZE JSONDATA INTO AN OBJECT
          * https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-how-to?pivots=dotnet-5-0#how-to-read-json-as-net-objects-deserialize
+         * 
+         * HOW TO GET A SPECIFIC SUBSECTION OF A JSON DATA
+         * https://docs.microsoft.com/en-us/dotnet/standard/serialization/system-text-json-use-dom-utf8jsonreader-utf8jsonwriter?pivots=dotnet-6-0#deserialize-subsections-of-a-json-payload
          */
         private readonly ILogger<HomeController> _logger;
         private static DeckOfCards? deckOfCards { get; set; }

@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "Rick & Morty";
+}
+
+<div class="text-center">
+    <h2 class="display-4">Rick & Morty</h2>
+</div>
+
+<div class="container">
+
+    <form asp-controller="Rick" asp-action="Search">
+        <input type="text" placeholder="Search for characters in the Rick & Morty Universe!"
+               name="character" class="form-control"/> <br />
+
+        <input type="submit" value="Search"
+               class="btn btn-success"/>
+    </form>
+
+</div>

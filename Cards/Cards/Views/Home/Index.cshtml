@@ -3,11 +3,20 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Deck of Cards</h1>
+    <h1 class="display-4">APIs</h1>
 
-    <form asp-controller="Home" asp-action="ShuffleDeck">
-        <input type="submit"
-               class="btn btn-success"/>
-    </form>
+    <div class="row">
+
+        <form asp-controller="Home" asp-action="ShuffleDeck">
+            <input type="submit" value="Deck of Cards"
+                   class="btn btn-success" />
+        </form> <br /> <br /> <br />
+
+        <form asp-controller="Rick" asp-action="Index">
+            <input type="submit" value="Rick & Morty"
+                   class="btn btn-success" />
+        </form>
+
+    </div>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

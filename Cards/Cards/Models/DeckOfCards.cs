@@ -14,6 +14,8 @@ namespace Cards.Models
         public int remaining { get; set; }
         public Card[]? cards { get; set; }
 
+        public List<Player> Players { get; set; }
+
         // vanessas hand
         public Card[]? Vanessa { get; set; }
 
@@ -115,7 +117,7 @@ namespace Cards.Models
         public void AddToPile(DeckOfCards? deckOfCards, string pile = "Vanessa")
         {
             // add to vanessa pile ----------------------------------------------------------------
-            string cardsForVanessa = ForVanessa(deckOfCards.cards);
+            string cardsForVanessa = CardsToAddToPile(deckOfCards.cards);
             string vanessaURL =
                     $"http://deckofcardsapi.com/api/deck/{deckOfCards.deck_id}/pile/{pile}/add/?cards={cardsForVanessa}";
             Console.WriteLine($"URL Vanessa: {vanessaURL}");
@@ -226,7 +228,7 @@ namespace Cards.Models
 
         }
 
-        private string ForVanessa(Card[] cards)
+        private string CardsToAddToPile(Card[] cards)
         {
             string s = "";
             foreach(Card card in cards)
