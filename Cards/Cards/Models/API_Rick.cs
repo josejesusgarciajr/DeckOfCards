@@ -13,16 +13,27 @@ namespace Cards.Models
         {
         }
 
+        public Episode GetEpisode(int episodeID)
+        {
+
+            string url
+                = $"https://rickandmortyapi.com/api/episode/{episodeID}";
+
+            string jsonData = GetJSonData(url);
+
+            Episode episode = ReadJsonDataForEpisode(jsonData);
+
+            return episode;
+        }
+
         public Character[] Search(string character)
         {
-            Console.WriteLine($"Charcter: {character}");
             string url =
                 $"https://rickandmortyapi.com/api/character/?name={character}";
             Console.WriteLine($"URL: {url}");
 
             // get json data from server
             string jsonData = GetJSonData(url);
-            Console.WriteLine($"RESPONSE FROM SERVER: {jsonData}");
 
             // read json data
             if(jsonData.Equals("No Characters"))
@@ -31,7 +42,6 @@ namespace Cards.Models
             }
 
             Character[] characters = ReadJsonDataArray(jsonData);
-            Console.WriteLine($"Number of Characters: {characters.Length}");
 
             return characters;
         }
@@ -40,7 +50,6 @@ namespace Cards.Models
         {
             string url
                 = $"https://rickandmortyapi.com/api/character/{id}";
-            Console.WriteLine($"GET CHARACTER URL: {url}");
 
             string jsonData = GetJSonData(url);
 
@@ -86,12 +95,20 @@ namespace Cards.Models
             using(JsonDocument document = JsonDocument.Parse(jsonData))
             {
                 JsonElement root = document.RootElement;
+                Console.WriteLine($"Root: {root}");
                 int id = root.GetProperty("id").GetInt32();
                 string name = root.GetProperty("name").ToString();
                 string image = root.GetProperty("image").ToString();
                 string status = root.GetProperty("status").ToString();
                 string gender = root.GetProperty("gender").ToString();
                 string species = root.GetProperty("species").ToString();
+
+                JsonElement episodeArray = root.GetProperty("episode");
+                foreach(JsonElement episode in episodeArray.EnumerateArray())
+                {
+                    Console.WriteLine($"EPISODE: {episode.ToString()}");
+                    character.EpisodeList.Add(episode.ToString());
+                }
 
                 // origin
                 JsonElement originInfo = root.GetProperty("origin");
@@ -104,6 +121,7 @@ namespace Cards.Models
                 character.Gender = gender;
                 character.Species = species;
                 character.Origin = origin;
+                character.Episodes = character.EpisodeList.ToArray();
             }
 
             return character;
@@ -131,5 +149,26 @@ namespace Cards.Models
 
             return characters.ToArray();
         }
+
+        private Episode ReadJsonDataForEpisode(string jsonData)
+        {
+
+            Episode? episode =
+                JsonSerializer.Deserialize<Episode>(jsonData);
+
+            List<Character> characters = new List<Character>();
+            foreach(string characterURL in episode.characters)
+            {
+                string[] data = characterURL.Split("https://rickandmortyapi.com/api/character/");
+                int characterID = Int32.Parse(data[1]);
+
+                characters.Add(GetCharacter(characterID));
+            }
+
+            episode.CharactersArray = characters.ToArray();
+
+            return episode;
+        }
+
     }
 }

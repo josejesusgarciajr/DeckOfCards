@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Cards.Models
 {
     public class Character
@@ -10,14 +12,18 @@ namespace Cards.Models
         public string Species { get; set; }
         public string Gender { get; set; }
         public string Origin { get; set; }
+        public string[] Episodes { get; set; }
 
-        public Character(){ }
+        public List<string> EpisodeList { get; set; }
+
+        public Character(){ EpisodeList = new List<string>(); }
 
         public Character(int id, string name, string image)
         {
             ID = id;
             Name = name;
             Image = image;
+            EpisodeList = new List<string>();
         }
 
         public Character(int id, string name, string image,
@@ -30,6 +36,7 @@ namespace Cards.Models
             Species = species;
             Gender = gender;
             Origin = origin;
+            EpisodeList = new List<string>();
         }
     }
 }

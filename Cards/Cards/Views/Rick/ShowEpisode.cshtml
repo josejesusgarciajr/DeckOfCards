@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Episode Information";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Model.name</h1>
+</div>
+
+<div class="container row">
+
+    <div class="col-2">
+
+        <code>Name of Episode:</code> <p>@Model.name</p>
+
+        <code>Air Date:</code> <p>@Model.air_date</p>
+
+        <code>Episode:</code> <p>@Model.episode</p>
+
+    </div>
+
+    <div class="col-10">
+        @foreach (Character character in Model.CharactersArray)
+        {
+            <a asp-controller="Rick" asp-action="ShowCharacter"
+               asp-route-characterID="@character.ID">
+                <img src="@character.Image"
+                     width="80" height="80" />
+            </a>
+        }
+    </div>
+</div>

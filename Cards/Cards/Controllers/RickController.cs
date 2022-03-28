@@ -33,5 +33,12 @@ namespace Cards.Controllers
 
             return View(character);
         }
+
+        public IActionResult ShowEpisode(int episodeID)
+        {
+            Episode episode = API.GetEpisode(episodeID);
+
+            return View(episode);
+        }
     }
 }

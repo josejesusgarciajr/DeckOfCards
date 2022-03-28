@@ -11,6 +11,10 @@
 
     <div class="col-4">
 
+        <div class="text-center">
+            <h3 class="lead">Basic Info</h3>
+        </div>
+
         <div class="row">
             <code>Status: </code>
             <p class="lead">@Model.Status</p>
@@ -34,8 +38,30 @@
     </div>
 
 
-    <div class="col-8">
+    <div class="col-4">
         <img src="@Model.Image"/>
+    </div>
+
+    <div class="col-4">
+
+        <div class="text-center">
+            <h3 class="lead">Episode Appearances</h3>
+        </div>
+
+        @foreach(string episode in Model.EpisodeList)
+        {
+            <code>Episode: </code>
+            string[] data = episode.Split("https://rickandmortyapi.com/api/episode/");
+            Console.WriteLine($"DATA COUNT: {data.Length}");
+            Console.WriteLine($"Episode ID: {data[1]}");
+            int episodeID = Int32.Parse(data[1]);
+        <p class="lead">
+            <a asp-controller="Rick" asp-action="ShowEpisode"
+               asp-route-episodeID="@episodeID">
+                @episode
+            </a>
+        </p>
+        }
     </div>
 
 </div>
