@@ -30,7 +30,6 @@ namespace Cards.Models
         {
             string url =
                 $"https://rickandmortyapi.com/api/character/?name={character}";
-            Console.WriteLine($"URL: {url}");
 
             // get json data from server
             string jsonData = GetJSonData(url);
@@ -95,7 +94,6 @@ namespace Cards.Models
             using(JsonDocument document = JsonDocument.Parse(jsonData))
             {
                 JsonElement root = document.RootElement;
-                Console.WriteLine($"Root: {root}");
                 int id = root.GetProperty("id").GetInt32();
                 string name = root.GetProperty("name").ToString();
                 string image = root.GetProperty("image").ToString();
@@ -106,7 +104,6 @@ namespace Cards.Models
                 JsonElement episodeArray = root.GetProperty("episode");
                 foreach(JsonElement episode in episodeArray.EnumerateArray())
                 {
-                    Console.WriteLine($"EPISODE: {episode.ToString()}");
                     character.EpisodeList.Add(episode.ToString());
                 }
 
@@ -153,7 +150,7 @@ namespace Cards.Models
         private Episode ReadJsonDataForEpisode(string jsonData)
         {
 
-            Episode? episode =
+            Episode? episode = 
                 JsonSerializer.Deserialize<Episode>(jsonData);
 
             List<Character> characters = new List<Character>();

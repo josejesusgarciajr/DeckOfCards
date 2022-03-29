@@ -52,9 +52,8 @@
         {
             <code>Episode: </code>
             string[] data = episode.Split("https://rickandmortyapi.com/api/episode/");
-            Console.WriteLine($"DATA COUNT: {data.Length}");
-            Console.WriteLine($"Episode ID: {data[1]}");
             int episodeID = Int32.Parse(data[1]);
+
         <p class="lead">
             <a asp-controller="Rick" asp-action="ShowEpisode"
                asp-route-episodeID="@episodeID">

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Mars Photos";
+}
+
+<div class="text-center">
+    <h1 class="lead">NASA PHOTOS</h1>
+</div>
+
+<div class="container">
+    @foreach(NasaPhoto nasaPhoto in Model)
+    {
+        <img src="@nasaPhoto.img_src"
+             width="150" height="150"/>
+    }
+</div>

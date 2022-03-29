@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewData["Title"] = "NASA - API";
+}
+
+<div class="text-center">
+    <h1 class="lead">NASA</h1>
+</div>
+
+<div class="containter">
+    <form asp-controller="Nasa" asp-action="DisplayMarsRoverImages">
+
+        <!--ROVER-->
+        <div class="container">
+            <code>ROVER:</code>
+            <select class="form-control" name="rover">
+                <option disabled>Choose Rover</option>
+                <option value="Curiosity">Curiosity</option>
+                <option value="Opportunity">Opportunity</option>
+                <option value="Spirit">Spirit</option>
+            </select>
+        </div> <br />
+
+        <!--CAMERA-->
+        <div class="container">
+            <code>CAMERA:</code>
+            <select class="form-control" name="camera">
+                <option disabled>Choose Camera</option>
+                <option value="FHAZ">Front Hazard Avoidance Camera</option>
+                <option value="RHAZ">Rear Hazard Avoidance Camera</option>
+                <option value="NAVCAM">Navigation Camera</option>
+                <option value="ALL">ALL</option>
+            </select>
+        </div> <br />
+
+        <!--PAGE-->
+        <div class="container">
+            <code>PAGE:</code>
+            <select class="form-control" name="page">
+                <option disabled>Choose page (25 images per page)</option>
+                <option value="-1">ALL</option>
+                @for (int pageNumber = 1; pageNumber < 100; pageNumber++)
+                {
+                    <option>@pageNumber</option>
+                }
+            </select>
+        </div> <br />
+
+        <div class="container">
+            <input type="submit" class="btn btn-primary" value="FETCH NASA PHOTOS"/>
+        </div>
+    </form>
+</div>
