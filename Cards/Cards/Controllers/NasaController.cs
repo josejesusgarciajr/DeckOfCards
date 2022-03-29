@@ -16,11 +16,26 @@ namespace Cards.Controllers
          *  SET UP NASA API
          */
         private static Nasa_API Nasa = new Nasa_API();
+        private static List<NasaPhoto> LastNasaPhotoFetch = new List<NasaPhoto>();
 
         // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult NasaPhotoInfo(int photoID)
+        {
+            NasaPhoto nasaPhoto = new NasaPhoto();
+            foreach(NasaPhoto nasaPhotoQuery in LastNasaPhotoFetch)
+            {
+                if(nasaPhotoQuery.id == photoID)
+                {
+                    nasaPhoto = nasaPhotoQuery;
+                }
+            }
+
+            return View(nasaPhoto);
         }
 
         public IActionResult DisplayMarsRoverImages(string rover, string camera, int page)
@@ -46,7 +61,9 @@ namespace Cards.Controllers
 
             url += api_key;
             Console.WriteLine($"NASA URL: {url}");
+
             NasaPhoto[] nasaPhotos = Nasa.GetAllImages(url);
+            LastNasaPhotoFetch = nasaPhotos.ToList<NasaPhoto>();
 
             return View(nasaPhotos);
         }

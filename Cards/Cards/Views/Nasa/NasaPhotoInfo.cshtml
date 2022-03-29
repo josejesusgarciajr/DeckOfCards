@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "NASA PHOTO - INFO";
+}
+
+<div class="text-center">
+    <h1 class="lead">NASA PHOTO INFORMATION</h1>
+</div>
+
+<div class="row">
+
+    <!--EARTH_DATE-->
+    <div class="col-3">
+        <code>DATE:</code><p>@Model.earth_date</p>
+    </div>
+
+    <!--ROVER-->
+    <div class="col-3">
+        <code>ROVER:</code><p>@Model.rover.name</p>
+        <code>Launch Date:</code><p>@Model.rover.launch_date</p>
+        <code>Landing Date:</code><p>@Model.rover.landing_date</p>
+        <code>Status:</code><p>@Model.rover.status</p>
+    </div>
+
+    <!--CAMERA-->
+    <div class="col-3">
+        <code>CAMERA:</code><p>@Model.camera.full_name</p>
+        <code>Abbreviation:</code><p>@Model.camera.name</p>
+    </div>
+
+    <!--IMAGE-->
+    <div class="col-3">
+        <img src="@Model.img_src" />
+    </div>
+</div>
+
