@@ -43,7 +43,18 @@ namespace Cards.Controllers
 
             string url
                 = $"https://api.nasa.gov/mars-photos/api/v1/rovers/{rover}/photos?sol=1000";
-            string api_key = "&api_key=DEMO_KEY";
+            string nasa_api_key = "";
+            try
+            {
+                nasa_api_key = Environment.GetEnvironmentVariable("NASA_API_KEY");
+            } catch(Exception)
+            {
+                nasa_api_key = "DEMO_KEY";
+            }
+            
+
+
+            string api_key = $"&api_key={nasa_api_key}";
 
             if (!camera.Equals("ALL"))
             {
