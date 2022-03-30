@@ -21,6 +21,10 @@ namespace Cards.Controllers
         public IActionResult Search(string character)
         {
             ViewData["CharacterName"] = character;
+            if(character == null)
+            {
+                 character = "ALL CHARACTERS";
+            }
 
             Character[] characters = API.Search(character);
 

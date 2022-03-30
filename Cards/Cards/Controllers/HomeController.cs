@@ -63,37 +63,26 @@ namespace Cards.Controllers
             reader.Close();
             dataStream.Close();
             response.Close();
-            Console.WriteLine("CLOSED EVERYTHING");
+
             /*
              * Deserialize JsonData to Object
              */
-            Console.WriteLine("BEFORE DESERIALZIE");
             deckOfCards =
                 JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
-            Console.WriteLine("DESERIALIZE");
-
-            Console.WriteLine("");
-            Console.WriteLine($"Success: {deckOfCards?.success}");
-            Console.WriteLine($"DeckID: {deckOfCards.deck_id}");
-            Console.WriteLine($"Shuffled: {deckOfCards?.shuffled}");
-            Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
+     
             return View();
         }
 
         public IActionResult DrawCards(int numberOfCards = -1)
         {
-            Console.WriteLine($"Number of Cards to Draw: {numberOfCards}");
             Card[] cards = new Card[1];
 
             if(numberOfCards == -1)
             {
-                Console.WriteLine("RETURN CARD NOT FIRED");
-               
                 // get vanessas cards
                 cards = deckOfCards.GetVanessasCards();
             } else
             {
-                Console.WriteLine($"RETURN CARD FIRED");
                 cards = deckOfCards?.DrawCard(numberOfCards);
             }
 

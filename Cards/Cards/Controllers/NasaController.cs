@@ -58,20 +58,17 @@ namespace Cards.Controllers
 
             if (!camera.Equals("ALL"))
             {
-                Console.WriteLine("CAMERA SELECTED");
                 url
                     += $"&camera={camera}";
             }
 
             if(page != -1)
             {
-                Console.WriteLine("PAGE SELECTED");
                 url
                     += $"&page={page}";
             }
 
             url += api_key;
-            Console.WriteLine($"NASA URL: {url}");
 
             NasaPhoto[] nasaPhotos = Nasa.GetAllImages(url);
             LastNasaPhotoFetch = nasaPhotos.ToList<NasaPhoto>();

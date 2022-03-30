@@ -32,7 +32,6 @@ namespace Cards.Models
              * http://deckofcardsapi.com/api/deck/<<deck_id>>/pile/<<pile_name>>/return/?cards=AS,2S
              */
             Card[] cards = new Card[1];
-            Console.WriteLine($"Returning to Deck: {code}");
 
             string url =
                 $"http://deckofcardsapi.com/api/deck/{deck_id}/pile/Vanessa/return/?cards={code}";
@@ -58,13 +57,6 @@ namespace Cards.Models
             // Deserialize JsonData into Object
             DeckOfCards? deckOfCards =
                 JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
-
-            Console.WriteLine("");
-            Console.WriteLine($"Success: {deckOfCards?.success}");
-            Console.WriteLine($"DeckID: {deckOfCards?.deck_id}");
-            Console.WriteLine($"Shuffled: {deckOfCards?.shuffled}");
-            Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
-            Console.WriteLine($"Cards: {cards?.Length}");
 
             return deckOfCards?.cards;
         }
@@ -120,7 +112,7 @@ namespace Cards.Models
             string cardsForVanessa = CardsToAddToPile(deckOfCards.cards);
             string vanessaURL =
                     $"http://deckofcardsapi.com/api/deck/{deckOfCards.deck_id}/pile/{pile}/add/?cards={cardsForVanessa}";
-            Console.WriteLine($"URL Vanessa: {vanessaURL}");
+            
             WebRequest request = WebRequest.Create(vanessaURL);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -180,7 +172,6 @@ namespace Cards.Models
                     d.Add(new Card(image, value, suit, code));
                 }
             }
-            Console.WriteLine($"LIST: {d.Count}");
 
             return d.ToArray();
         }
@@ -211,13 +202,6 @@ namespace Cards.Models
             // Deserialize JsonData into Object
             DeckOfCards? deckOfCards =
                 JsonSerializer.Deserialize<DeckOfCards>(responseFromServer);
-
-            Console.WriteLine("");
-            Console.WriteLine($"Success: {deckOfCards?.success}");
-            Console.WriteLine($"DeckID: {deckOfCards?.deck_id}");
-            Console.WriteLine($"Shuffled: {deckOfCards?.shuffled}");
-            Console.WriteLine($"Remaing: {deckOfCards?.remaining}");
-            Console.WriteLine($"Cards: {deckOfCards?.cards}");
 
             AddToPile(deckOfCards);
  

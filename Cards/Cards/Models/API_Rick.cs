@@ -26,10 +26,49 @@ namespace Cards.Models
             return episode;
         }
 
+        private Character[] GetAllCharacters()
+        {
+            List<Character> characters = new List<Character>();
+            string url =
+                    $"https://rickandmortyapi.com/api/character/";
+
+            string jsonData = GetJSonData(url);
+
+            // get the max page count
+            int maxPage;
+
+            // Get Info
+            using(JsonDocument document = JsonDocument.Parse(jsonData))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement info = root.GetProperty("info");
+                maxPage = info.GetProperty("pages").GetInt32();
+            }
+
+
+            for(int page = 1; page <= maxPage; page++)
+            {
+                string urlForAll = url + $"?page={page}";
+                jsonData = GetJSonData(urlForAll);
+                characters.AddRange(ReadJsonDataArray(jsonData));
+            }
+
+            return characters.ToArray();
+        }
+
         public Character[] Search(string character)
         {
             string url =
                 $"https://rickandmortyapi.com/api/character/?name={character}";
+
+            if(character.Equals("ALL CHARACTERS"))
+            {
+                /*
+                 *  HIT THE WEBSITE WITH PAGE COUNT
+                 */
+                Character[] allCharacters = GetAllCharacters();
+                return allCharacters;
+            }
 
             // get json data from server
             string jsonData = GetJSonData(url);
@@ -40,9 +79,31 @@ namespace Cards.Models
                 return null;
             }
 
-            Character[] characters = ReadJsonDataArray(jsonData);
+            List<Character> characters = new List<Character>();
 
-            return characters;
+            jsonData = GetJSonData(url);
+
+            // get the max page count
+            int maxPage;
+
+            // Get Info
+            using (JsonDocument document = JsonDocument.Parse(jsonData))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement info = root.GetProperty("info");
+                maxPage = info.GetProperty("pages").GetInt32();
+            }
+            
+            for (int page = 1; page <= maxPage; page++)
+            {
+                string urlForAll =
+                    $"https://rickandmortyapi.com/api/character/?page={page}&name={character}";
+                
+                jsonData = GetJSonData(urlForAll);
+                characters.AddRange(ReadJsonDataArray(jsonData));
+            }
+            
+            return characters.ToArray();
         }
 
         public Character GetCharacter(int id)

@@ -63,7 +63,7 @@ namespace Cards.Models
                     nasaPhotos.Add(nasaPhoto);
                 }
             }
-            Console.WriteLine($"PHOTOS COUNT: {nasaPhotos.Count}");
+
             return nasaPhotos.ToArray();
         }
     }
