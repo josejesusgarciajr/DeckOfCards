@@ -25,7 +25,7 @@ namespace Cards.Controllers
             {
                  character = "ALL CHARACTERS";
             }
-
+            
             Character[] characters = API.Search(character);
 
             return View(characters);

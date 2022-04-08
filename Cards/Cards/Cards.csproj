@@ -7,5 +7,6 @@
   <ItemGroup>
     <Folder Include="Views\Rick\" />
     <Folder Include="Views\Nasa\" />
+    <Folder Include="Views\TraderJoes\" />
   </ItemGroup>
 </Project>
