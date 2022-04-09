@@ -9,4 +9,7 @@
     <Folder Include="Views\Nasa\" />
     <Folder Include="Views\TraderJoes\" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
 </Project>

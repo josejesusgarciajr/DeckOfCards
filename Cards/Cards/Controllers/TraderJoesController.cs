@@ -21,6 +21,16 @@ namespace Cards.Controllers
         public IActionResult GetProduct(int id)
         {
             QueryTraderDB queryTrader = new QueryTraderDB();
+
+            if(id == 0)
+            {
+                Console.WriteLine("GET ALL PRODUCTS");
+                List<Product> products = queryTrader.GetAllProducts();
+                string jsonData = JsonSerializer.Serialize(products);
+
+                return View((object)jsonData);
+            }
+            Console.WriteLine("FUCK YOU");
             Product product = queryTrader.GetProduct(id);
 
             string JsonData = JsonSerializer.Serialize(product);
