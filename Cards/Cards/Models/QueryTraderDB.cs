@@ -82,6 +82,32 @@ namespace Cards.Models
         {
             List<Product> products = new List<Product>();
 
+            // establish sql connection
+            using(SqlConnection sqlConnection = new SqlConnection(CS))
+            {
+                // query
+                string query = "SELECT * FROM Product"
+                    + $" WHERE Name LIKE '%{name}%';";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // open sql connection
+                sqlConnection.Open();
+
+                // get products
+                using(SqlDataReader reader = sqlCommand.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        products.Add(new Product((int)reader[0], (string)reader[1],
+                            (string)reader[2], (string)reader[3], (string)reader[4],
+                            (string)reader[5], (string)reader[6]));
+                    }
+                }
+
+                // close sql connection
+                sqlConnection.Close();
+            }
+
             return products;
         }
     }

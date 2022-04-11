@@ -24,17 +24,24 @@ namespace Cards.Controllers
 
             if(id == 0)
             {
-                Console.WriteLine("GET ALL PRODUCTS");
                 List<Product> products = queryTrader.GetAllProducts();
                 string jsonData = JsonSerializer.Serialize(products);
 
                 return View((object)jsonData);
             }
-            Console.WriteLine("FUCK YOU");
-            Product product = queryTrader.GetProduct(id);
 
+            Product product = queryTrader.GetProduct(id);
             string JsonData = JsonSerializer.Serialize(product);
-            Console.WriteLine($"JSON DATA: {JsonData}");
+
+            return View((object)JsonData);
+        }
+
+        public IActionResult Search(string name)
+        {
+            QueryTraderDB queryTrader = new QueryTraderDB();
+
+            List<Product> products = queryTrader.Search(name);
+            string JsonData = JsonSerializer.Serialize(products);
 
             return View((object)JsonData);
         }
