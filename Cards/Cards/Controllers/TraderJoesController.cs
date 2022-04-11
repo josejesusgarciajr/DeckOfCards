@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Cards.Models;
@@ -18,32 +20,84 @@ namespace Cards.Controllers
             return View();
         }
 
-        public IActionResult GetProduct(int id)
+        public string GetProduct(int id)
         {
             QueryTraderDB queryTrader = new QueryTraderDB();
 
-            if(id == 0)
+            // Get all Characters
+            if (id == 0)
             {
                 List<Product> products = queryTrader.GetAllProducts();
                 string jsonData = JsonSerializer.Serialize(products);
 
-                return View((object)jsonData);
+                return jsonData;
             }
 
             Product product = queryTrader.GetProduct(id);
             string JsonData = JsonSerializer.Serialize(product);
 
-            return View((object)JsonData);
+            return JsonData;
         }
 
-        public IActionResult Search(string name)
+        public string Search(string name)
         {
             QueryTraderDB queryTrader = new QueryTraderDB();
 
             List<Product> products = queryTrader.Search(name);
             string JsonData = JsonSerializer.Serialize(products);
 
-            return View((object)JsonData);
+            return JsonData;
         }
+
+        // TESTING FETCHING JSon Data From Server
+        public string FetchCharacter()
+        {
+            string url = "https://localhost:5001/TraderJoes/GetProduct/1";
+            WebRequest request = WebRequest.Create(url);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            // Display the status.
+            Console.WriteLine(response.StatusDescription);
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine($"RESPONSE FROM SERVER: {responseFromServer}");
+            // Cleanup the streams and the response.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            return responseFromServer;
+        }
+
+        // TESTING FETCHING JSon Data From Server BY NAME
+        public string FetchByName()
+        {
+            string url = "https://localhost:5001/TraderJoes/Search?name=Lady";
+            WebRequest request = WebRequest.Create(url);
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            // Display the status.
+            Console.WriteLine(response.StatusDescription);
+            // Get the stream containing content returned by the server.
+            Stream dataStream = response.GetResponseStream();
+            // Open the stream using a StreamReader for easy access.
+            StreamReader reader = new StreamReader(dataStream);
+            // Read the content.
+            string responseFromServer = reader.ReadToEnd();
+            // Display the content.
+            Console.WriteLine($"RESPONSE FROM SERVER: {responseFromServer}");
+            // Cleanup the streams and the response.
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+
+            return responseFromServer;
+        }
+
     }
 }
