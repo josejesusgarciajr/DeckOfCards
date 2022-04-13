@@ -24,7 +24,7 @@ namespace Cards.Controllers
         {
             QueryTraderDB queryTrader = new QueryTraderDB();
 
-            // Get all Characters
+            // Get all products
             if (id == 0)
             {
                 List<Product> products = queryTrader.GetAllProducts();
