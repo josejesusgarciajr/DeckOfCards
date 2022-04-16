@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jginvincible/git/DeckOfCards/Cards/Cards/Cards.csproj": {}
+    "/Users/jginvincible/git/DeckOfCards/Cards/Cards.csproj": {}
   },
   "projects": {
-    "/Users/jginvincible/git/DeckOfCards/Cards/Cards/Cards.csproj": {
+    "/Users/jginvincible/git/DeckOfCards/Cards/Cards.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jginvincible/git/DeckOfCards/Cards/Cards/Cards.csproj",
+        "projectUniqueName": "/Users/jginvincible/git/DeckOfCards/Cards/Cards.csproj",
         "projectName": "Cards",
-        "projectPath": "/Users/jginvincible/git/DeckOfCards/Cards/Cards/Cards.csproj",
+        "projectPath": "/Users/jginvincible/git/DeckOfCards/Cards/Cards.csproj",
         "packagesPath": "/Users/jginvincible/.nuget/packages/",
-        "outputPath": "/Users/jginvincible/git/DeckOfCards/Cards/Cards/obj/",
+        "outputPath": "/Users/jginvincible/git/DeckOfCards/Cards/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/Users/jginvincible/.nuget/NuGet/NuGet.Config"
+          "/Users/jginvincible/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"

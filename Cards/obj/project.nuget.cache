@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "X9VqjDXDewbmDKRmW04Hj/xIOZElNvbhKJDnhRWabY1bzrL2Wq899H39VB1n+Po+Xx1u7va456xC2NbRTBsblw==",
+  "dgSpecHash": "EybCp+kWEbXIUmHJ7gsRxg1tJnqECnGRGwzKSbfoPcKeIhNABkvm1sOMZQ4ho4rCBebO0o7AWw5q3e7HlR0fow==",
   "success": true,
-  "projectFilePath": "/Users/jginvincible/git/DeckOfCards/Cards/Cards/Cards.csproj",
+  "projectFilePath": "/Users/jginvincible/git/DeckOfCards/Cards/Cards.csproj",
   "expectedPackageFiles": [
     "/Users/jginvincible/.nuget/packages/microsoft.netcore.platforms/3.1.0/microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "/Users/jginvincible/.nuget/packages/microsoft.win32.registry/4.7.0/microsoft.win32.registry.4.7.0.nupkg.sha512",
