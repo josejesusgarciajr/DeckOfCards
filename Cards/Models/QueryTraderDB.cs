@@ -14,7 +14,8 @@ namespace Cards.Models
         public QueryTraderDB(IConfiguration iconfig)
         {
             _config = iconfig;
-            CS = _config.GetValue<string>("ConnectionString:default");
+            //CS = _config.GetValue<string>("ConnectionString:default");
+            CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
         }
 
         public Product GetProduct(int id)
