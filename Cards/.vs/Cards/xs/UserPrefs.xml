@@ -1,21 +1,18 @@
 ﻿<Properties StartupConfiguration="{F06AC502-436F-4242-9B16-CDF112577F1D}|Default">
   <MonoDevelop.Ide.ItemProperties.Cards PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/Nasa_API.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Views/TraderJoes/Index.cshtml">
     <Files>
-      <File FileName="Controllers/NasaController.cs" Line="18" Column="47" />
-      <File FileName="Models/Nasa_API.cs" Line="12" Column="16" />
+      <File FileName="Views/TraderJoes/Index.cshtml" Line="17" Column="9" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Cards" expanded="True">
             <Node name="Cards" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="Nasa_API.cs" selected="True" />
-              </Node>
               <Node name="Views" expanded="True">
-                <Node name="TraderJoes" expanded="True" />
+                <Node name="TraderJoes" expanded="True">
+                  <Node name="Index.cshtml" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
