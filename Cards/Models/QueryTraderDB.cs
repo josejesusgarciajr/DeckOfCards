@@ -15,7 +15,6 @@ namespace Cards.Models
         {
             _config = iconfig;
             CS = _config.GetValue<string>("ConnectionString:default");
-            //CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
         }
 
         public Product GetProduct(int id)
