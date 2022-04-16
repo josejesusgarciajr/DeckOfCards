@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Cards.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,6 +15,14 @@ namespace Cards.Controllers
 {
     public class TraderJoesController : Controller
     {
+
+        private readonly IConfiguration _config;
+
+        public TraderJoesController(IConfiguration iconfig)
+        {
+            _config = iconfig;
+        }
+
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -22,7 +31,7 @@ namespace Cards.Controllers
 
         public string GetProduct(int id)
         {
-            QueryTraderDB queryTrader = new QueryTraderDB();
+            QueryTraderDB queryTrader = new QueryTraderDB(_config);
 
             // Get all products
             if (id == 0)
@@ -41,7 +50,7 @@ namespace Cards.Controllers
 
         public string Search(string name)
         {
-            QueryTraderDB queryTrader = new QueryTraderDB();
+            QueryTraderDB queryTrader = new QueryTraderDB(_config);
 
             List<Product> products = queryTrader.Search(name);
             string JsonData = JsonSerializer.Serialize(products);

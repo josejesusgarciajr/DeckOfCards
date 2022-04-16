@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Cards.Models
 {
     public class QueryTraderDB
     {
+        private readonly IConfiguration _config;
+
         private string CS { get; set; }
 
-        public QueryTraderDB()
+        public QueryTraderDB(IConfiguration iconfig)
         {
-            CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
+            _config = iconfig;
+            CS = _config.GetValue<string>("ConnectionString:default");
+            //CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
         }
 
         public Product GetProduct(int id)
