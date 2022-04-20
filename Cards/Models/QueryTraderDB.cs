@@ -15,6 +15,27 @@ namespace Cards.Models
             CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
         }
 
+        public void DeleteProduct(int id)
+        {
+            // establish sql connection
+            using (SqlConnection sqlConnection = new SqlConnection(CS))
+            {
+                // query
+                string query = "DELETE FROM Product"
+                    + $" WHERE ID = {id}";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // open connection
+                sqlConnection.Open();
+
+                // add product to db
+                sqlCommand.ExecuteNonQuery();
+
+                // close connection
+                sqlConnection.Close();
+            }
+        }
+
         public void AddProduct(Product product)
         {
             // establish sql connection

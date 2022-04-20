@@ -31,5 +31,13 @@ namespace Cards.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+        public IActionResult DeleteTJProduct(int productID)
+        {
+            QueryTraderDB queryTrader = new QueryTraderDB();
+            queryTrader.DeleteProduct(productID);
+
+            return RedirectToAction("Index", "Admin");
+        }
+
     }
 }
