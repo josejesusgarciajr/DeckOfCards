@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Trader Joes Admin Dashboard";
+}
+
+<div class="container">
+    <h1 class="display-4 text-center">DashBoard</h1>
+
+    <!-- ADD PRODUCT TO TJ DB-->
+    <form asp-action="AddTJProductView" asp-controller="Admin">
+        <input type="submit" value="Add Product" class="btn btn-primary"/>
+    </form>
+</div> <br />
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">SKU</th>
+                <th scope="col">Manage</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(Product product in Model)
+            {
+                <tr>
+                    <th scope="row">@product.ID</th>
+                    <td>@product.Name</td>
+                    <td>@product.BarCode</td>
+                    <td>
+                        <a asp-action="UpdateTJProductView" asp-controller="Admin"
+                           asp-route-productID="@product.ID" class="btn btn-warning">Update</a>
+
+                        <a asp-action="DeleteTJProduct" asp-controller="Admin"
+                           asp-route-productID="@product.ID" class="btn btn-danger">DELETE</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,42 @@
+﻿@model Product;
+@{
+    ViewData["Title"] = "Add TJ Product";
+}
+
+<div class="container text-center">
+    <h1 class="display-4">Add Product to Trader Joes</h1>
+</div>
+
+<div class="container">
+    <form asp-action="AddTJProduct" asp-controller="Admin">
+
+        <label>Name of Product:</label>
+        <input class="form-control" asp-for="Name"
+               type="text" placeholder="Health Ade Kombucha Tropical Punch" /> <br />
+
+        <label>SKU of Product:</label>
+        <input class="form-control" asp-for="BarCode"
+               type="text" placeholder="0000 0000" /> <br />
+
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Example Category</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+                <option>Snacks</option>
+                <option>Grocery</option>
+                <option>Cold Pro</option>
+                <option>Dry Pro</option>
+                <option>Frozen</option>
+            </select>
+        </div>
+
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile"
+                   asp-for="FormFile">
+            <label class="custom-file-label" for="customFile">Choose Image</label>
+        </div> <br />
+
+        <label>Description:</label>
+        <textarea asp-for="Description" placeholder="Good Summer Drink" class="form-control"></textarea>
+
+    </form>
+</div>

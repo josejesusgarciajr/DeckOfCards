@@ -16,13 +16,6 @@ namespace Cards.Controllers
     public class TraderJoesController : Controller
     {
 
-        private readonly IConfiguration _config;
-
-        public TraderJoesController(IConfiguration iconfig)
-        {
-            _config = iconfig;
-        }
-
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -31,7 +24,7 @@ namespace Cards.Controllers
 
         public string GetProduct(int id)
         {
-            QueryTraderDB queryTrader = new QueryTraderDB(_config);
+            QueryTraderDB queryTrader = new QueryTraderDB();
 
             // Get all products
             if (id == 0)
@@ -50,7 +43,7 @@ namespace Cards.Controllers
 
         public string Search(string name)
         {
-            QueryTraderDB queryTrader = new QueryTraderDB(_config);
+            QueryTraderDB queryTrader = new QueryTraderDB();
 
             List<Product> products = queryTrader.Search(name);
             string JsonData = JsonSerializer.Serialize(products);
@@ -61,7 +54,7 @@ namespace Cards.Controllers
         // TESTING FETCHING JSon Data From Server
         public string FetchCharacter()
         {
-            string url = "https://localhost:5001/TraderJoes/GetProduct/1";
+            string url = "https://runapis.azurewebsites.net/TraderJoes/GetProduct/";
             WebRequest request = WebRequest.Create(url);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -86,7 +79,7 @@ namespace Cards.Controllers
         // TESTING FETCHING JSon Data From Server BY NAME
         public string FetchByName()
         {
-            string url = "https://localhost:5001/TraderJoes/Search?name=Lady";
+            string url = "https://runapis.azurewebsites.net/TraderJoes/Search?name=pink";
             WebRequest request = WebRequest.Create(url);
 
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();

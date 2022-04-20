@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.AspNetCore.Http;
+
 namespace Cards.Models
 {
     public class Product
@@ -11,6 +13,9 @@ namespace Cards.Models
 
         public string Status { get; set; }
         public string Description { get; set; }
+
+        // for image upload
+        public IFormFile FormFile { get; set; }
 
         public Product() {}
 

@@ -7,16 +7,12 @@ namespace Cards.Models
 {
     public class QueryTraderDB
     {
-        private readonly IConfiguration _config;
-
         private string CS { get; set; }
 
-        public QueryTraderDB(IConfiguration iconfig)
+        public QueryTraderDB()
         {
-            _config = iconfig;
             //CS = _config.GetValue<string>("ConnectionString:default");
             CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
-            Console.WriteLine($"CS: {CS}");
         }
 
         public Product GetProduct(int id)
