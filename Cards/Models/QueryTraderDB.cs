@@ -15,9 +15,30 @@ namespace Cards.Models
             CS = Environment.GetEnvironmentVariable("TRADERJOESCS");
         }
 
+        public void AddProduct(Product product)
+        {
+            // establish sql connection
+            using(SqlConnection sqlConnection = new SqlConnection(CS))
+            {
+                // query
+                string query = "INSERT INTO Product" 
+                    + $" VALUES('{product.Name}', '{product.Price}', {product.BarCode},'{product.Image}',"
+                    + $"'{product.Category}', 'okay', '{product.Description}');";
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // open connection
+                sqlConnection.Open();
+
+                // add product to db
+                sqlCommand.ExecuteNonQuery();
+
+                // close connection
+                sqlConnection.Close();
+            }
+        }
+
         public Product GetProduct(int id)
         {
-            //Product product = new Product();
             Product product = new Product();
 
             // establish sql connection
@@ -37,8 +58,8 @@ namespace Cards.Models
                     while(reader.Read())
                     {
                         product
-                            = new Product((int)reader[0], (string)reader[1], (string)reader[2], (string)reader[3],
-                            (string)reader[4], (string)reader[5], (string)reader[6]);
+                            = new Product((int)reader[0],(string)reader[1], (double)reader[2],(string)reader[3], (string)reader[4],
+                            (string)reader[5], (string)reader[6], (string)reader[7]);
                     }
                 }
 
@@ -68,8 +89,8 @@ namespace Cards.Models
                 {
                     while (reader.Read())
                     {
-                        products.Add(new Product((int)reader[0], (string)reader[1], (string)reader[2], (string)reader[3],
-                            (string)reader[4], (string)reader[5], (string)reader[6]));
+                        products.Add(new Product((int)reader[0], (string)reader[1], (double)reader[2], (string)reader[3], (string)reader[4],
+                            (string)reader[5], (string)reader[6], (string)reader[7]));
                     }
                 }
 
@@ -100,9 +121,8 @@ namespace Cards.Models
                 {
                     while(reader.Read())
                     {
-                        products.Add(new Product((int)reader[0], (string)reader[1],
-                            (string)reader[2], (string)reader[3], (string)reader[4],
-                            (string)reader[5], (string)reader[6]));
+                        products.Add(new Product((int)reader[0], (string)reader[1], (double)reader[2], (string)reader[3], (string)reader[4],
+                            (string)reader[5], (string)reader[6], (string)reader[7]));
                     }
                 }
 

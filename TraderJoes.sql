@@ -8,7 +8,8 @@ CREATE DATABASE TraderJoes;
 CREATE TABLE Product(
 	ID int IDENTITY PRIMARY KEY,
 	Name varchar(100),
-	BarCode varchar(12),
+	Price float,
+	BarCode varchar(25),
 	Image varchar(255),
 	Category varchar(50),
 	Status varchar(60),
@@ -16,9 +17,9 @@ CREATE TABLE Product(
 );
 
 INSERT INTO Product
-VALUES('Health Ade Kombucha Tropical Punch', '0000 0000', '/TraderJoes/HealthAdeKombuchaTropicalPunch.jpg',
+VALUES('Health Ade Kombucha Tropical Punch', 2.49,'0000 0000', '/TraderJoes/HealthAdeKombuchaTropicalPunch.jpg',
 'drinks', 'okay', 'Good Summer Drink');
 
 INSERT INTO Product
-VALUES('Health Ade Kombucha Pink Lady', '0000 0000', '/TraderJoes/HealthAdeKombuchaPinkLady.jpg',
+VALUES('Health Ade Kombucha Pink Lady', 2.49,'0000 0001', '/TraderJoes/HealthAdeKombuchaPinkLady.jpg',
 'drinks', 'okay', 'Good Summer Drink');

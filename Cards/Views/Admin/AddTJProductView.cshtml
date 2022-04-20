@@ -14,6 +14,10 @@
         <input class="form-control" asp-for="Name"
                type="text" placeholder="Health Ade Kombucha Tropical Punch" /> <br />
 
+        <label>Price of Product:</label>
+        <input class="form-control" asp-for="Price"
+               type="text" placeholder="2.49" /> <br />
+
         <label>SKU of Product:</label>
         <input class="form-control" asp-for="BarCode"
                type="text" placeholder="0000 0000" /> <br />
@@ -37,6 +41,8 @@
 
         <label>Description:</label>
         <textarea asp-for="Description" placeholder="Good Summer Drink" class="form-control"></textarea>
+        <br />
 
+        <input type="submit" class="btn btn-success" />
     </form>
 </div>

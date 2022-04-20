@@ -23,5 +23,13 @@ namespace Cards.Controllers
             return View();
         }
 
+        public IActionResult AddTJProduct(Product product)
+        {
+            QueryTraderDB queryTrader = new QueryTraderDB();
+            queryTrader.AddProduct(product);
+
+            return RedirectToAction("Index", "Admin");
+        }
+
     }
 }
