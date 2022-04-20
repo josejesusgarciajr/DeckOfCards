@@ -1,25 +1,28 @@
 ﻿@model Product;
 @{
-    ViewData["Title"] = "Add TJ Product";
+    ViewData["Title"] = "Update TJ Product";
 }
 
 <div class="container text-center">
-    <h1 class="display-4">Add Product to Trader Joes</h1>
+    <h1 class="display-4">Update Trader Joes Product</h1>
 </div>
 
 <div class="container">
-    <form asp-action="AddTJProduct" asp-controller="Admin">
+    <form asp-action="UpdateTJProduct" asp-controller="Admin">
+
+        <!-- hidden field for product ID-->
+        <input type="hidden" value="@Model.ID" asp-for="ID"/>
 
         <label>Name of Product:</label>
-        <input class="form-control" asp-for="Name"
+        <input class="form-control" asp-for="Name" value="@Model.Name"
                type="text" placeholder="Health Ade Kombucha Tropical Punch" /> <br />
 
         <label>Price of Product:</label>
-        <input class="form-control" asp-for="Price"
+        <input class="form-control" asp-for="Price" value="@Model.Price"
                type="text" placeholder="2.49" /> <br />
 
         <label>SKU of Product:</label>
-        <input class="form-control" asp-for="BarCode"
+        <input class="form-control" asp-for="BarCode" value="@Model.BarCode"
                type="text" placeholder="0000 0000" /> <br />
 
         <div class="form-group">
@@ -33,6 +36,11 @@
             </select>
         </div>
 
+        <!-- warning message -->
+        <div class="alert alert-warning" role="alert">
+            Selecting a new Image will override the old image!
+        </div>
+
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="customFile"
                    asp-for="FormFile">
@@ -40,9 +48,9 @@
         </div> <br />
 
         <label>Description:</label>
-        <textarea asp-for="Description" placeholder="Good Summer Drink" class="form-control"></textarea>
+        <textarea asp-for="Description" placeholder="Good Summer Drink" class="form-control">@Model.Description</textarea>
         <br />
 
-        <input type="submit" class="btn btn-success" value="Add Product"/>
+        <input type="submit" class="btn btn-success" value="Update Product"/>
     </form>
 </div>

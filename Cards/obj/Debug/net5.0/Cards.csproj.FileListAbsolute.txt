@@ -150,3 +150,4 @@
 /Users/jginvincible/git/DeckOfCards/Cards/obj/Debug/net5.0/Cards.genruntimeconfig.cache
 /Users/jginvincible/git/DeckOfCards/Cards/obj/Debug/net5.0/Razor/Views/Admin/Index.cshtml.g.cs
 /Users/jginvincible/git/DeckOfCards/Cards/obj/Debug/net5.0/Razor/Views/Admin/AddTJProductView.cshtml.g.cs
+/Users/jginvincible/git/DeckOfCards/Cards/obj/Debug/net5.0/Razor/Views/Admin/UpdateTJProductView.cshtml.g.cs

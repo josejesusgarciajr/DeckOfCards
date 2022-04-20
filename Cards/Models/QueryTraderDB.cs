@@ -58,6 +58,30 @@ namespace Cards.Models
             }
         }
 
+        public void UpdateProduct(Product product)
+        {
+            // establish sql connection
+            using(SqlConnection sqlConnection = new SqlConnection(CS))
+            {
+                // query
+                string query = "UPDATE Product"
+                    + $" SET Name = '{product.Name}', Price = {product.Price}, BarCode = '{product.BarCode}', Image = '{product.Image}',"
+                    + $" Category = '{product.Category}', Status = 'okay', Description = '{product.Description}'"
+                    + $" WHERE ID = {product.ID};";
+                Console.WriteLine($"Update Query: {query}");
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // open connection
+                sqlConnection.Open();
+
+                // update product
+                sqlCommand.ExecuteNonQuery();
+
+                // close connection
+                sqlConnection.Close();
+            }
+        }
+
         public Product GetProduct(int id)
         {
             Product product = new Product();
