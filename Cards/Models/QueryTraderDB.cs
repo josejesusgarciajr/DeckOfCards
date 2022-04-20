@@ -43,10 +43,10 @@ namespace Cards.Models
             {
                 // query
                 string query = "INSERT INTO Product" 
-                    + $" VALUES('{product.Name}', '{product.Price}', {product.BarCode},'{product.Image}',"
+                    + $" VALUES('{product.Name}', '{product.Price}', '{product.BarCode}','{product.Image}',"
                     + $"'{product.Category}', 'okay', '{product.Description}');";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
+                Console.WriteLine($"ADD QUERY: {query}");
                 // open connection
                 sqlConnection.Open();
 
